@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sara Rosato</title>
+<meta name="description" content="Sara Rosato, PhD researcher in machine learning for healthcare at LMU Munich (MCML), in Björn Eskofier's group.">
+<meta name="theme-color" content="#F8F6FB">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F8F6FB;
+    --surface: #FFFFFF;
+    --ink: #2F2A3B;
+    --muted: #6F6782;
+    --line: #E6E0EE;
+    --pink: #EFA9BD;
+    --lilac: #B9A6E0;
+    --mint: #A8D8CB;
+    --link: #8A5FB8;
+    --display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+    --body: "Figtree", "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1F1B26; --surface: #28232F; --ink: #EEE9F4; --muted: #ADA4BC;
+      --line: #3A3345; --link: #C9B2F0;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 17px/1.65 var(--body);
+  }
+  a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { text-decoration-thickness: 2px; }
+  :focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-radius: 4px; }
+  .skip { position: absolute; left: -999px; }
+  .skip:focus { left: 1rem; top: 1rem; background: var(--surface); padding: .4rem .8rem; }
+
+  header {
+    max-width: 1040px; margin: 0 auto; padding: 1.4rem 1.5rem;
+    display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; align-items: baseline; justify-content: space-between;
+  }
+  .brand { font: 700 1.15rem var(--display); color: var(--ink); text-decoration: none; }
+  nav { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; }
+  nav a { color: var(--muted); text-decoration: none; font-weight: 500; padding: .1rem 0; border-bottom: 2px solid transparent; }
+  nav a:hover { color: var(--ink); }
+  nav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--pink); }
+
+  .signal { display: block; width: 100%; height: 110px; }
+
+  main { max-width: 1040px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+  section[data-page] { display: none; }
+  section[data-page].active { display: block; }
+
+  h1 { font: 700 clamp(2.2rem, 5vw, 3.3rem)/1.1 var(--display); margin: 1.5rem 0 1.8rem; letter-spacing: -.01em; }
+  h2 { font: 700 1.55rem/1.2 var(--display); margin: 2.8rem 0 1rem; }
+  h3 { font: 600 1.05rem/1.35 var(--body); margin: 0; }
+
+  .home { display: grid; grid-template-columns: 260px 1fr; gap: 3rem; align-items: start; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 22px;
+    padding: 1.5rem; text-align: center; position: sticky; top: 1.5rem;
+  }
+  .avatar {
+    width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 1rem; display: grid; place-items: center;
+    background: conic-gradient(var(--pink), var(--lilac), var(--mint), var(--pink));
+    padding: 5px;
+  }
+  .avatar img, .avatar span {
+    width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: grid; place-items: center;
+    background: var(--surface); font: 700 2.4rem var(--display); color: var(--muted);
+  }
+  .role { margin: 0; font-weight: 600; }
+  .where { margin: .2rem 0 1rem; color: var(--muted); font-size: .95rem; }
+  .links { display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem .9rem; font-size: .95rem; }
+  .cv {
+    display: inline-block; margin-top: 1.2rem; padding: .55rem 1.1rem; border-radius: 999px;
+    background: var(--pink); color: #2F2A3B; font-weight: 600; text-decoration: none;
+  }
+  .cv:hover { background: var(--lilac); }
+
+  .prose p { max-width: 68ch; margin: 0 0 1rem; }
+
+  .news { list-style: none; margin: 0; padding: 0; }
+  .news li { display: grid; grid-template-columns: 5.5rem 1fr; gap: 1rem; padding: .75rem 0; border-top: 1px solid var(--line); }
+  .news time { color: var(--muted); font-variant-numeric: tabular-nums; font-size: .95rem; padding-top: .1rem; }
+  .news li.more { display: none; }
+  .news.open li.more { display: grid; }
+  .toggle {
+    margin-top: .6rem; background: none; border: 1px solid var(--line); border-radius: 999px;
+    padding: .4rem 1rem; font: 500 .95rem var(--body); color: var(--ink); cursor: pointer;
+  }
+  .toggle:hover { border-color: var(--lilac); }
+
+  .timeline { list-style: none; margin: 0; padding: 0 0 0 1.4rem; border-left: 2px solid var(--line); }
+  .timeline li { position: relative; padding: 0 0 1.8rem; max-width: 72ch; }
+  .timeline li::before {
+    content: ""; position: absolute; left: calc(-1.4rem - 7px); top: .45rem;
+    width: 12px; height: 12px; border-radius: 50%; background: var(--dot, var(--lilac));
+    box-shadow: 0 0 0 4px var(--bg);
+  }
+  .meta { color: var(--muted); font-size: .95rem; margin: .1rem 0 .4rem; }
+  .timeline p { margin: 0; }
+
+  .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; }
+  .project { border-top: 4px solid var(--accent, var(--lilac)); padding-top: .9rem; }
+  .project p { margin: .35rem 0 0; color: var(--muted); }
+
+  .pub { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 1.2rem 1.4rem; max-width: 78ch; }
+  .pub .me { font-weight: 600; color: var(--ink); }
+  .pub .venue { display: inline-block; margin-top: .5rem; padding: .1rem .6rem; border-radius: 999px; background: var(--mint); color: #2F2A3B; font-size: .85rem; font-weight: 600; }
+
+  footer { max-width: 1040px; margin: 0 auto; padding: 1.5rem; color: var(--muted); font-size: .9rem; border-top: 1px solid var(--line); }
+
+  @media (max-width: 760px) {
+    .home { grid-template-columns: 1fr; gap: 2rem; }
+    .card { position: static; }
+    .news li { grid-template-columns: 1fr; gap: .1rem; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header>
+  <a class="brand" href="#home">Sara Rosato</a>
+  <nav aria-label="Main">
+    <a href="#home">Home</a>
+    <a href="#career">Career</a>
+    <a href="#projects">Projects</a>
+    <a href="#publications">Publications</a>
+    <a href="#beyond">Beyond research</a>
+  </nav>
+</header>
+
+<canvas class="signal" aria-hidden="true"></canvas>
+
+<main id="main">
+
+  <!-- HOME -->
+  <section data-page="home">
+    <h1>Hi, I'm Sara 🌸</h1>
+    <div class="home">
+      <aside class="card">
+        <div class="avatar">
+          <!-- Put your photo at images/profile.jpg; the initials show until then -->
+          <img src="images/profile.jpg" alt="Sara Rosato" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'SR'}))">
+        </div>
+        <p class="role">PhD Researcher</p>
+        <p class="where">LMU Munich &amp; MCML<br>📍 Munich, Germany</p>
+        <div class="links">
+          <a href="mailto:sararosato.r@gmail.com">Email</a>
+          <a href="https://github.com/sararst">GitHub</a>
+          <a href="https://www.linkedin.com/in/sara-rosato-2b5a81190/">LinkedIn</a>
+        </div>
+        <!-- Upload your CV as cv.pdf in the repo root -->
+        <a class="cv" href="cv.pdf">Download my CV</a>
+      </aside>
+
+      <div>
+        <div class="prose">
+          <p>I'm a first-year PhD researcher in <strong>machine learning for healthcare</strong> in Prof. <strong>Björn Eskofier</strong>'s group at LMU Munich, funded by the Munich Center for Machine Learning (MCML).</p>
+          <p>Originally from Italy, I studied Computer Engineering and Data Science at Politecnico di Torino and Intelligent Communication Systems at EURECOM, as a double degree. Before the PhD I spent 18 months at SLB in Cambridge, MA, building ML pipelines for methane emissions monitoring.</p>
+          <p>Most of my work lives where physics-based models meet neural networks: taking noisy real-world sensor signals and making them trustworthy, first for the environment and now for health.</p>
+        </div>
+
+        <h2>News</h2>
+        <ol class="news" id="news">
+          <li><time>09-2026</time><span>Started my PhD in Björn Eskofier's group at <strong>LMU Munich</strong>, funded by <strong>MCML</strong> 🇩🇪</span></li>
+          <li><time>08-2026</time><span>Wrapped up 18 months at <strong>SLB</strong> on methane emissions monitoring and moved from Boston to Munich.</span></li>
+          <li><time>06-2025</time><span><a href="https://doi.org/10.1145/3725411"><em>Logical and Physical Optimizations for SQL Query Execution over Large Language Models</em></a> published at <strong>SIGMOD 2025</strong> in Berlin.</span></li>
+          <li><time>03-2025</time><span>Joined <strong>SLB</strong> in Cambridge, MA as a Data Engineer (VIE) 🇺🇸</span></li>
+          <li class="more"><time>2025</time><span>Graduated from the double MSc at <strong>Politecnico di Torino</strong> and <strong>EURECOM</strong>, with a thesis on deep learning anomaly detection done at Qualcomm.</span></li>
+          <li class="more"><time>08-2024</time><span>Started an internship at <strong>Qualcomm</strong> in Munich.</span></li>
+          <li class="more"><time>09-2023</time><span>Moved to Sophia Antipolis for EURECOM with an <strong>Erasmus+ scholarship</strong> 🇫🇷</span></li>
+        </ol>
+        <button class="toggle" type="button" aria-expanded="false" aria-controls="news">Show older news</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAREER -->
+  <section data-page="career">
+    <h1>Career</h1>
+    <h2>Experience</h2>
+    <ol class="timeline">
+      <li style="--dot: var(--pink)">
+        <h3>PhD Researcher, LMU Munich &amp; MCML</h3>
+        <p class="meta">Sep 2026 – now · Munich</p>
+        <p>Machine learning for healthcare with wearable and multimodal sensor data, in Björn Eskofier's group.</p>
+      </li>
+      <li style="--dot: var(--mint)">
+        <h3>ML Engineer, Skinaptiks</h3>
+        <p class="meta">Ongoing</p>
+        <p>Working on SKIN'Cast, a clinical decision support system that combines electronic skin and tactile AI for prosthetic fitting. Designed its explainable module for predicting socket fatigue and replacement.</p>
+      </li>
+      <li>
+        <h3>Data Engineer (VIE), SLB</h3>
+        <p class="meta">Mar 2025 – Aug 2026 · Cambridge, MA</p>
+        <p>Built a methane detection pipeline end to end: a temporal convolutional network that learns a correction on top of a physics ODE for humidity inside gas sensor housings, trained with a self-supervised, physics-guided loss. Presented it live with a physical sensor.</p>
+      </li>
+      <li>
+        <h3>Data Engineer Intern, Qualcomm</h3>
+        <p class="meta">Aug 2024 – Jan 2025 · Munich</p>
+        <p>Deep learning anomaly detection for semiconductor manufacturing (90% accuracy) and pipeline optimization for large-scale sensor systems.</p>
+      </li>
+      <li>
+        <h3>Data Analyst, Politecnico di Torino</h3>
+        <p class="meta">Apr 2024 – 2025 · Remote</p>
+        <p>Anomaly and long-term trend detection across more than 100 sensor streams.</p>
+      </li>
+    </ol>
+
+    <h2>Education</h2>
+    <ol class="timeline">
+      <li style="--dot: var(--pink)">
+        <h3>PhD, Machine Learning for Healthcare</h3>
+        <p class="meta">LMU Munich · 2026 – </p>
+      </li>
+      <li>
+        <h3>MSc Intelligent Communication Systems (double degree)</h3>
+        <p class="meta">EURECOM, Sophia Antipolis · 2023 – 2025</p>
+        <p>Erasmus+ scholarship, selected among 300 candidates.</p>
+      </li>
+      <li>
+        <h3>MSc Data Science and Engineering (double degree)</h3>
+        <p class="meta">Politecnico di Torino · 2022 – 2025</p>
+        <p>Thesis: Enhancing Anomaly Detection in Semiconductor Manufacturing Using Deep Learning, with Qualcomm.</p>
+      </li>
+      <li>
+        <h3>BSc Computer Engineering</h3>
+        <p class="meta">Politecnico di Torino · 2019 – 2022</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- PROJECTS -->
+  <section data-page="projects">
+    <h1>Projects</h1>
+    <div class="projects">
+      <article class="project" style="--accent: var(--pink)">
+        <h3>⌚ Wearable self-tracking</h3>
+        <p>An n=1 health pipeline: Fitbit data plus a Telegram bot for natural-language logging, heading toward TCN-based HRV prediction and a Streamlit dashboard.</p>
+      </article>
+      <article class="project" style="--accent: var(--mint)">
+        <h3>🗄️ Galois</h3>
+        <p>A database system that uses LLMs as a storage layer for SQL queries, with custom physical operators and query optimizations. Published at SIGMOD 2025.</p>
+      </article>
+      <article class="project">
+        <h3><a href="https://github.com/sararst/Malcom/tree/main/Project">📡 ML for Communication</a></h3>
+        <p>Replication of decentralized learning over wireless networks with broadcast-based subgraph sampling.</p>
+      </article>
+      <article class="project" style="--accent: var(--pink)">
+        <h3><a href="https://github.com/sararst/MLDL23-FL-project">🚗 Semantic segmentation</a></h3>
+        <p>A federated learning benchmark for autonomous driving, plus a Clustered Averaged Batch Normalization.</p>
+      </article>
+      <article class="project" style="--accent: var(--mint)">
+        <h3><a href="https://github.com/sararst/Malis">🤖 MALIS</a></h3>
+        <p>Implementations and studies of machine learning methods for intelligent systems.</p>
+      </article>
+      <article class="project">
+        <h3><a href="https://github.com/sararst/Numerical-optimization-for-large-scale-problems">📈 Numerical optimization</a></h3>
+        <p>Constrained and unconstrained optimization techniques for large-scale problems.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section data-page="publications">
+    <h1>Publications</h1>
+    <article class="pub">
+      <h3><a href="https://doi.org/10.1145/3725411">Logical and Physical Optimizations for SQL Query Execution over Large Language Models</a></h3>
+      <p class="meta">Dario Satriani, Enzo Veltri, Donatello Santoro, <span class="me">Sara Rosato</span>, Simone Varriale, Paolo Papotti</p>
+      <span class="venue">SIGMOD 2025 · Proc. ACM Manag. Data 3(3)</span>
+    </article>
+  </section>
+
+  <!-- BEYOND RESEARCH -->
+  <section data-page="beyond">
+    <h1>Beyond research</h1>
+    <ol class="timeline">
+      <li style="--dot: var(--pink)">
+        <h3>🍺 Maß &amp; Mind</h3>
+        <p>A monthly science-talks-in-a-bar series I'm starting in Munich: short talks by researchers, then time to chat over a Maß.</p>
+      </li>
+      <li style="--dot: var(--mint)">
+        <h3>Lead Mentor, WeAreHere · Politecnico di Torino</h3>
+        <p class="meta">2022 – 2024</p>
+        <p>Mentored 60+ women in STEM bachelor's programmes and coordinated a team of 30 mentors.</p>
+      </li>
+      <li>
+        <h3>Teaching</h3>
+        <p class="meta">2022 – 2025</p>
+        <p>Teaching assistant for Linear Algebra at Politecnico di Torino, math tutor at GoStudent with video tutorials used by 200+ students, and outreach to high-school girls through the "Ingegneria Informatica è creatività" programme.</p>
+      </li>
+      <li style="--dot: var(--pink)">
+        <h3>Community</h3>
+        <p>Reply Ambassador (organized the Reply Challenge at EURECOM for 50 students), QWomen volunteer at Qualcomm, and events organizer with BEST Torino.</p>
+      </li>
+    </ol>
+  </section>
+</main>
+
+<footer>© 2026 Sara Rosato · updated 09-2026</footer>
+
+<script>
+  // Page switching via the URL hash
+  const pages = [...document.querySelectorAll('section[data-page]')];
+  const navLinks = [...document.querySelectorAll('nav a')];
+  function show() {
+    const id = (location.hash || '#home').slice(1);
+    const target = pages.find(p => p.dataset.page === id) ? id : 'home';
+    pages.forEach(p => p.classList.toggle('active', p.dataset.page === target));
+    navLinks.forEach(a => a.getAttribute('href') === '#' + target
+      ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'));
+    window.scrollTo(0, 0);
+  }
+  addEventListener('hashchange', show);
+  show();
+
+  // Older news toggle
+  const news = document.getElementById('news');
+  const toggle = document.querySelector('.toggle');
+  toggle.addEventListener('click', () => {
+    const open = news.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+    toggle.textContent = open ? 'Show fewer' : 'Show older news';
+  });
+
+  // Header signal: noisy sensor readings with a smooth fit drawn through them
+  const canvas = document.querySelector('.signal');
+  const ctx = canvas.getContext('2d');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const channels = [
+    { color: '--pink',  amp: .26, f: [1.3, 2.9], speed: .18, off: .38 },
+    { color: '--lilac', amp: .20, f: [0.9, 3.7], speed: .12, off: .55 },
+    { color: '--mint',  amp: .16, f: [1.7, 4.3], speed: .22, off: .70 },
+  ];
+  let W, H, noise;
+  function resize() {
+    const dpr = devicePixelRatio || 1;
+    W = canvas.clientWidth; H = canvas.clientHeight;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    noise = channels.map(() => Array.from({ length: Math.ceil(W / 9) + 2 }, () => (Math.random() - .5)));
+  }
+  function draw(t) {
+    ctx.clearRect(0, 0, W, H);
+    channels.forEach((c, i) => {
+      const col = css(c.color);
+      const y = x => {
+        const u = x / W * Math.PI * 2;
+        return H * c.off - H * c.amp * (Math.sin(u * c.f[0] + t * c.speed) * .7 + Math.sin(u * c.f[1] - t * c.speed * 1.6) * .3);
+      };
+      ctx.fillStyle = col; ctx.globalAlpha = .45;
+      noise[i].forEach((n, k) => {
+        const x = k * 9;
+        ctx.beginPath(); ctx.arc(x, y(x) + n * H * .16, 1.6, 0, Math.PI * 2); ctx.fill();
+      });
+      ctx.globalAlpha = 1; ctx.strokeStyle = col; ctx.lineWidth = 2.5; ctx.lineCap = 'round';
+      ctx.beginPath();
+      for (let x = 0; x <= W; x += 4) x ? ctx.lineTo(x, y(x)) : ctx.moveTo(x, y(x));
+      ctx.stroke();
+    });
+  }
+  function loop(ms) { draw(ms / 1000); requestAnimationFrame(loop); }
+  resize();
+  addEventListener('resize', () => { resize(); if (reduce) draw(0); });
+  reduce ? draw(0) : requestAnimationFrame(loop);
+</script>
+</body>
+</html>
